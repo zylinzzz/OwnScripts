@@ -54,7 +54,7 @@ sudo systemctl restart docker
 mkdir -p /root/docker-files/npm
 cd /root/docker-files/npm
 # mkdir -p /root/data/docker_data/npm/data
-echo 'version: '3'
+echo 'version: "3"
 services:
   app:
     image: 'jc21/nginx-proxy-manager:latest'
@@ -84,7 +84,6 @@ services:
     volumes:
       - /root/data/docker_data/portainer/data:/data
       - /var/run/docker.sock:/var/run/docker.sock' > /root/docker-files/portainer/docker-compose.yaml
-
 docker compose up -d
 
 # docker-files/qbittorrent
