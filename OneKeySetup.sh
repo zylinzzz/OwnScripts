@@ -17,7 +17,7 @@ sudo apt install code # or code-insiders
 
 # Install docker and docker-compose
 # Run the following command to uninstall all conflicting packages:
-for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+# for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
 # Add Docker's official GPG key:
 sudo apt-get update
 sudo apt-get install ca-certificates curl
