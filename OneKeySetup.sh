@@ -38,12 +38,37 @@ chmod +x /usr/local/bin/docker-compose
 # 为docker配置ipv6连接
 sudo mkdir -p /etc/docker
 echo '{
+ "log-driver": "json-file",
+ "log-opts": {
+        "max-size": "20m",
+        "max-file": "3"
+ },
  "ipv6": true,
  "fixed-cidr-v6": "2001:db8:abc1::/64",  
  "experimental": true,
  "ip6tables": true
 }' | sudo tee /etc/docker/daemon.json
 sudo systemctl restart docker
+
+# Create Nginx Proxy Manager directories and YAML file
+mkdir -p /root/docker-files/npm
+cd /root/docker-files/npm
+# mkdir -p /root/data/docker_data/npm/data
+echo 'version: '3'
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '80:80'  # 保持默认即可，不建议修改左侧的80
+      - '2336:81'  # 冒号左边可以改成自己服务器未被占用的端口
+      - '443:443' # 保持默认即可，不建议修改左侧的443
+    volumes:
+      - ./data:/data # 冒号左边可以改路径，现在是表示把数据存放在在当前文件夹下的 data 文件夹中
+      - ./letsencrypt:/etc/letsencrypt  # 冒号左边可以改路径，现在是表示把数据存放在在当前文件夹下的 letsencrypt 文件夹中
+' > /root/docker-files/npm/docker-compose.yaml
+docker compose up -d
+
 
 # Create portainer directories and YAML file
 mkdir -p /root/docker-files/portainer
