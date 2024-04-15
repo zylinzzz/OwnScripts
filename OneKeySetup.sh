@@ -109,7 +109,7 @@ services:
       - 6881:6881/udp
       - 2356:2356
     restart: unless-stopped
-    network_mode: bridge' > docker-compose.yaml
+    network_mode: host' > docker-compose.yaml
 
 docker compose up -d
 
