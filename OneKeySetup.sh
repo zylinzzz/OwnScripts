@@ -86,31 +86,31 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock' > /root/docker-files/portainer/docker-compose.yaml
 docker compose up -d
 
-# docker-files/qbittorrent
-mkdir -p /root/docker-files/downloads
-mkdir -p /root/docker-files/qbittorrent
-cd /root/docker-files/qbittorrent
-echo 'version: "2"
-services:
-  qbittorrent:
-    image: linuxserver/qbittorrent
-    container_name: qbittorrent
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Shanghai # 你的时区
-      - UMASK_SET=022
-      - WEBUI_PORT=2356 # 将此处修改成你欲使用的 WEB 管理平台端口 
-    volumes:
-      - ./config:/config # 绝对路径请修改为自己的config文件夹
-      - /root/docker-files/downloads:/downloads # 绝对路径请修改为自己的downloads文件夹
-    ports:
-      - 6881:6881 
-      - 6881:6881/udp
-      - 2356:2356
-    restart: unless-stopped
-    network_mode: host' > docker-compose.yaml
+# # docker-files/qbittorrent
+# mkdir -p /root/docker-files/downloads
+# mkdir -p /root/docker-files/qbittorrent
+# cd /root/docker-files/qbittorrent
+# echo 'version: "2"
+# services:
+#   qbittorrent:
+#     image: linuxserver/qbittorrent
+#     container_name: qbittorrent
+#     environment:
+#       - PUID=1000
+#       - PGID=1000
+#       - TZ=Asia/Shanghai # 你的时区
+#       - UMASK_SET=022
+#       - WEBUI_PORT=2356 # 将此处修改成你欲使用的 WEB 管理平台端口 
+#     volumes:
+#       - ./config:/config # 绝对路径请修改为自己的config文件夹
+#       - /root/docker-files/downloads:/downloads # 绝对路径请修改为自己的downloads文件夹
+#     ports:
+#       - 6881:6881 
+#       - 6881:6881/udp
+#       - 2356:2356
+#     restart: unless-stopped
+#     network_mode: host' > docker-compose.yaml
 
-docker compose up -d
+# docker compose up -d
 
-docker exec qbittorrent ping6 -c4 youtube.com
+# docker exec qbittorrent ping6 -c4 youtube.com
